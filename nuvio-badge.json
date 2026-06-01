@@ -1,14 +1,28 @@
-[
-  {
-    "filters": ["vietsub", "sub việt", "phụ đề", "subviet", "sub"],
-    "badge": "https://img.icons8.com/fluency/48/subtitles.png"
-  },
-  {
-    "filters": ["thuyết minh", "thuyet minh", "tm"],
-    "badge": "https://img.icons8.com/fluency/48/microphone.png"
-  },
-  {
-    "filters": ["lồng tiếng", "long tieng", "lt"],
-    "badge": "https://img.icons8.com/fluency/48/audio-wave.png"
-  }
-]
+{
+  "badges": [
+    {
+      "id": "vietsub",
+      "type": "text",
+      "value": "Vietsub",
+      "filters": ["vietsub", "sub việt", "phụ đề", "subviet", "sub"],
+      "color": "#FFFFFF",
+      "backgroundColor": "#2196F3"
+    },
+    {
+      "id": "thuyetminh",
+      "type": "text",
+      "value": "Thuyết Minh",
+      "filters": ["thuyết minh", "thuyet minh", "tm"],
+      "color": "#FFFFFF",
+      "backgroundColor": "#4CAF50"
+    },
+    {
+      "id": "longtieng",
+      "type": "text",
+      "value": "Lồng Tiếng",
+      "filters": ["lồng tiếng", "long tieng", "lt"],
+      "color": "#FFFFFF",
+      "backgroundColor": "#E91E63"
+    }
+  ]
+}
