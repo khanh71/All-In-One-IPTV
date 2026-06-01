@@ -1,28 +1,37 @@
 {
-  "badges": [
+  "name": "Vietnamese Audio Badges",
+  "author": "Nuvio Developer",
+  "version": "1.0.0",
+  "streamExpressions": [
     {
-      "keywords": ["lồng tiếng", "long tieng", "LT", "Lồng Tiếng"],
-      "type": "text_badge",
-      "text": "LỒNG TIẾNG",
-      "background_color": "#E50914",
-      "text_color": "#FFFFFF",
-      "icon_url": ""
+      "pattern": "(?i)(lồng\\s+tiếng|long\\s+tieng|\\bLT\\b)",
+      "type": "badge",
+      "properties": {
+        "text": "LỒNG TIẾNG",
+        "backgroundColor": "#E50914",
+        "textColor": "#FFFFFF",
+        "style": "filled"
+      }
     },
     {
-      "keywords": ["phụ đề", "phu de", "vietsub", "sub", "PD", "Phụ Đề"],
-      "type": "text_badge",
-      "text": "PHỤ ĐỀ",
-      "background_color": "#0084FF",
-      "text_color": "#FFFFFF",
-      "icon_url": ""
+      "pattern": "(?i)(phụ\\s+đề|phu\\s+de|vietsub|\\bsub\\b|\\bPD\\b)",
+      "type": "badge",
+      "properties": {
+        "text": "PHỤ ĐỀ",
+        "backgroundColor": "#0084FF",
+        "textColor": "#FFFFFF",
+        "style": "filled"
+      }
     },
     {
-      "keywords": ["thuyết minh", "thuyet minh", "TM", "Thuyết Minh"],
-      "type": "text_badge",
-      "text": "THUYẾT MINH",
-      "background_color": "#00A859",
-      "text_color": "#FFFFFF",
-      "icon_url": ""
+      "pattern": "(?i)(thuyết\\s+minH|thuyet\\s+minh|\\bTM\\b)",
+      "type": "badge",
+      "properties": {
+        "text": "THUYẾT MINH",
+        "backgroundColor": "#00A859",
+        "textColor": "#FFFFFF",
+        "style": "filled"
+      }
     }
   ]
 }
