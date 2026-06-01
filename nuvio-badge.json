@@ -1,40 +1,14 @@
-{
-  "name": "Bộ lọc Ngôn ngữ Audio & Phụ đề Việt Nam",
-  "author": "Nuvio Developer",
-  "version": "1.0.0",
-  "rules": [
-    {
-      "target": "stream.title",
-      "type": "replace",
-      "matches": ["lồng tiếng", "long tieng", "\\[LT\\]", "\\bLT\\b"],
-      "replace_with": {
-        "style": "badge",
-        "text": "LỒNG TIẾNG",
-        "background": "#E50914",
-        "color": "#FFFFFF"
-      }
-    },
-    {
-      "target": "stream.title",
-      "type": "replace",
-      "matches": ["phụ đề", "phu de", "vietsub", "việt sub", "\\bsub\\b", "\\[PD\\]"],
-      "replace_with": {
-        "style": "badge",
-        "text": "PHỤ ĐỀ",
-        "background": "#0084FF",
-        "color": "#FFFFFF"
-      }
-    },
-    {
-      "target": "stream.title",
-      "type": "replace",
-      "matches": ["thuyết minh", "thuyet minh", "\\[TM\\]", "\\bTM\\b"],
-      "replace_with": {
-        "style": "badge",
-        "text": "THUYẾT MINH",
-        "background": "#00A859",
-        "color": "#FFFFFF"
-      }
-    }
-  ]
-}
+[
+  {
+    "filters": ["vietsub", "sub việt", "phụ đề", "subviet", "sub"],
+    "badge": "https://img.icons8.com/fluency/48/subtitles.png"
+  },
+  {
+    "filters": ["thuyết minh", "thuyet minh", "tm"],
+    "badge": "https://img.icons8.com/fluency/48/microphone.png"
+  },
+  {
+    "filters": ["lồng tiếng", "long tieng", "lt"],
+    "badge": "https://img.icons8.com/fluency/48/audio-wave.png"
+  }
+]
