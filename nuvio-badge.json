@@ -1,0 +1,28 @@
+{
+  "badges": [
+    {
+      "keywords": ["lồng tiếng", "long tieng", "LT", "Lồng Tiếng"],
+      "type": "text_badge",
+      "text": "LỒNG TIẾNG",
+      "background_color": "#E50914",
+      "text_color": "#FFFFFF",
+      "icon_url": ""
+    },
+    {
+      "keywords": ["phụ đề", "phu de", "vietsub", "sub", "PD", "Phụ Đề"],
+      "type": "text_badge",
+      "text": "PHỤ ĐỀ",
+      "background_color": "#0084FF",
+      "text_color": "#FFFFFF",
+      "icon_url": ""
+    },
+    {
+      "keywords": ["thuyết minh", "thuyet minh", "TM", "Thuyết Minh"],
+      "type": "text_badge",
+      "text": "THUYẾT MINH",
+      "background_color": "#00A859",
+      "text_color": "#FFFFFF",
+      "icon_url": ""
+    }
+  ]
+}
