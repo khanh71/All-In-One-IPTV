@@ -1,36 +1,39 @@
 {
-  "name": "Vietnamese Audio Badges",
+  "name": "Bộ lọc Ngôn ngữ Audio & Phụ đề Việt Nam",
   "author": "Nuvio Developer",
   "version": "1.0.0",
-  "streamExpressions": [
+  "rules": [
     {
-      "pattern": "(?i)(lồng\\s+tiếng|long\\s+tieng|\\bLT\\b)",
-      "type": "badge",
-      "properties": {
+      "target": "stream.title",
+      "type": "replace",
+      "matches": ["lồng tiếng", "long tieng", "\\[LT\\]", "\\bLT\\b"],
+      "replace_with": {
+        "style": "badge",
         "text": "LỒNG TIẾNG",
-        "backgroundColor": "#E50914",
-        "textColor": "#FFFFFF",
-        "style": "filled"
+        "background": "#E50914",
+        "color": "#FFFFFF"
       }
     },
     {
-      "pattern": "(?i)(phụ\\s+đề|phu\\s+de|vietsub|\\bsub\\b|\\bPD\\b)",
-      "type": "badge",
-      "properties": {
+      "target": "stream.title",
+      "type": "replace",
+      "matches": ["phụ đề", "phu de", "vietsub", "việt sub", "\\bsub\\b", "\\[PD\\]"],
+      "replace_with": {
+        "style": "badge",
         "text": "PHỤ ĐỀ",
-        "backgroundColor": "#0084FF",
-        "textColor": "#FFFFFF",
-        "style": "filled"
+        "background": "#0084FF",
+        "color": "#FFFFFF"
       }
     },
     {
-      "pattern": "(?i)(thuyết\\s+minH|thuyet\\s+minh|\\bTM\\b)",
-      "type": "badge",
-      "properties": {
+      "target": "stream.title",
+      "type": "replace",
+      "matches": ["thuyết minh", "thuyet minh", "\\[TM\\]", "\\bTM\\b"],
+      "replace_with": {
+        "style": "badge",
         "text": "THUYẾT MINH",
-        "backgroundColor": "#00A859",
-        "textColor": "#FFFFFF",
-        "style": "filled"
+        "background": "#00A859",
+        "color": "#FFFFFF"
       }
     }
   ]
