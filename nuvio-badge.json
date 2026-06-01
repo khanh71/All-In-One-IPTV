@@ -1,28 +1,20 @@
 {
   "badges": [
     {
-      "id": "vietsub",
+      "id": "lang_vi",
       "type": "text",
       "value": "Vietsub",
-      "filters": ["vietsub", "sub việt", "phụ đề", "subviet", "sub"],
+      "filters": ["vi", "vie", "vietnamese"],
       "color": "#FFFFFF",
       "backgroundColor": "#2196F3"
     },
     {
-      "id": "thuyetminh",
+      "id": "audio_dub",
       "type": "text",
       "value": "Thuyết Minh",
-      "filters": ["thuyết minh", "thuyet minh", "tm"],
+      "filters": ["dub", "dubbed"],
       "color": "#FFFFFF",
       "backgroundColor": "#4CAF50"
-    },
-    {
-      "id": "longtieng",
-      "type": "text",
-      "value": "Lồng Tiếng",
-      "filters": ["lồng tiếng", "long tieng", "lt"],
-      "color": "#FFFFFF",
-      "backgroundColor": "#E91E63"
     }
   ]
 }
