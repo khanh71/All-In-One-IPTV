@@ -639,25 +639,20 @@ def pick_best(channels: list[Channel]) -> list[Channel]:
     groups: dict[str, list[Channel]] = defaultdict(list)
     for ch in channels:
         groups[_dedup_key(ch.name)].append(ch)
+
+    # Sắp xếp để ưu tiên lấy link chất lượng cao nhất (8K -> 4K -> FHD -> SD)
     for k in groups:
         groups[k].sort(key=lambda c: (-c.quality[0], -c.quality[1]))
 
-    live_map = check_all([ch.url for chs in groups.values() for ch in chs])
-    live = sum(live_map.values())
-    dead = len(live_map) - live
-    print(
-        f"     ✅ {live}/{len(live_map)} sống" + (f", bỏ {dead} chết" if dead else "")
-    )
-
-    result, skipped = [], 0
+    result = []
+    # CHỈNH SỬA TẠI ĐÂY: Bỏ qua việc check link qua mạng, luôn lấy kênh đầu tiên (chất lượng cao nhất)
     for variants in groups.values():
-        best = next((c for c in variants if live_map.get(c.url, False)), None)
-        if best:
-            result.append(best)
-        else:
-            skipped += 1
-    if skipped:
-        print(f"     ⚠  Bỏ {skipped} kênh (link chết hết)")
+        if variants:
+            result.append(variants[0])
+
+    print(
+        f"     → Đã gộp nhóm và lấy {len(result)} kênh tốt nhất (bỏ qua check link sống)"
+    )
     return result
 
 
