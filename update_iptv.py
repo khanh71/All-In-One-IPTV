@@ -458,17 +458,11 @@ def fetch(url: str, timeout: int = 20) -> Optional[str]:
 
 
 def resolve_epg_url() -> str:
-    for url in EPG_URLS:
-        try:
-            r = requests.get(url, timeout=15, headers=HTTP_HEADERS, stream=True)
-            if r.status_code == 200:
-                print(f"  ✅ EPG: {url}")
-                return url
-        except Exception:
-            pass
-    print(
-        "  ⚠  Không tải được EPG, playlist sẽ không có lịch phát sóng.", file=sys.stderr
-    )
+    """Trả về thẳng link EPG đầu tiên, bỏ qua bước kiểm tra (ping) link."""
+    if EPG_URLS:
+        epg_link = EPG_URLS[0]
+        print(f"  ✅ Gắn thẳng EPG: {epg_link} (bỏ qua kiểm tra)")
+        return epg_link
     return ""
 
 
