@@ -5,7 +5,7 @@ Tự động lấy, lọc và sắp xếp danh sách kênh IPTV Việt Nam, cậ
 ## 🔗 Link playlist
 
 ```
-https://raw.githubusercontent.com/<YOUR_USERNAME>/<YOUR_REPO>/main/iptv.m3u
+https://raw.githubusercontent.com/khanh71/All-In-One-IPTV/main/http-iptv.m3u
 ```
 
 ## 📋 Nguồn dữ liệu (theo thứ tự ưu tiên)
