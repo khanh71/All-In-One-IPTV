@@ -22,9 +22,7 @@ import requests
 # CẤU HÌNH
 # ──────────────────────────────────────────────────────────────────────
 SOURCES = [
-    "https://1.org.vn/vmttv",
-    "https://raw.githubusercontent.com/blvbatman/iptv/refs/heads/main/iptv.m3u",
-    "https://raw.githubusercontent.com/ntd249/ntdiptv/main/fptudp",
+    "https://1.org.vn/vmttv"
 ]
 
 EPG_URLS = [
