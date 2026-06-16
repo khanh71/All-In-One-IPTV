@@ -528,6 +528,7 @@ def parse_m3u(text: str) -> list[Channel]:
                 "SỰ KIỆN" in upper_name
                 or "VTVPRIME" in upper_name
                 or "FPT" in upper_name
+                or "VOV" in upper_name
             ):
                 i += 1
                 continue
