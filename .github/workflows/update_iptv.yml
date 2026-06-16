@@ -2,12 +2,11 @@ name: Update IPTV Playlist
 
 on:
   schedule:
-    # 18:00 UTC = 01:00 ICT (UTC+7) every day
-    - cron: "0 18 * * *"
+    - cron: "0 18 * * *"   # 01:00 ICT hàng ngày
   workflow_dispatch:
 
 permissions:
-  contents: write   # cho phép push file vào repo
+  contents: write
 
 jobs:
   update-playlist:
@@ -27,6 +26,9 @@ jobs:
 
       - name: Install dependencies
         run: pip install requests
+
+      - name: List files (debug)
+        run: ls -la
 
       - name: Run IPTV updater
         run: python update_iptv.py
