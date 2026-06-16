@@ -31,8 +31,10 @@ https://blvbatman.dpdns.org/kenh/htv1.m3u8
 https://blvbatman.dpdns.org/kenh/htv2.m3u8
 #EXTINF:-1 tvg-id="htv3" tvg-logo="https://vietanhtv.id.vn/logo/htv3.png" group-title="HTV",HTV3
 https://blvbatman.dpdns.org/kenh/htv3.m3u8
+#EXTINF:-1 tvg-id="htvkey" tvg-logo="https://vietanhtv.id.vn/logo/htvkey.png" group-title="HTV",HTV 4
+https://blvbatman.dpdns.org/kenh/htv4.m3u8
 #EXTINF:-1 tvg-id="htv5" tvg-logo="https://raw.githubusercontent.com/ntd249/logochannel/refs/heads/main/HTV5_BChannel.png" group-title="HTV",HTV5
-udp://@225.1.3.58:30120
+udp://@225.1.2.189:30120
 #EXTINF:-1 tvg-id="htv7hd" tvg-logo="https://raw.githubusercontent.com/blvbatman/iptv/refs/heads/main/htv5.png" group-title="HTV",HTV7
 https://blvbatman.dpdns.org/kenh/htv5.m3u8
 #EXTINF:-1 tvg-id="htv9hd" tvg-logo="https://vietanhtv.id.vn/logo/htv9.png" group-title="HTV",HTV9
@@ -53,8 +55,6 @@ https://blvbatman.dpdns.org/kenh/htvcphunu.m3u8
 https://blvbatman.dpdns.org/kenh/htvcthuanviet.m3u8
 #EXTINF:-1 tvg-id="htvcplushd" tvg-logo="https://vietanhtv.id.vn/logo/htvcplus.png" group-title="HTV",HTVC+
 https://blvbatman.dpdns.org/kenh/htvcplus.m3u8
-#EXTINF:-1 tvg-id="htvkey" tvg-logo="https://vietanhtv.id.vn/logo/htvkey.png" group-title="HTV",HTV 4
-https://blvbatman.dpdns.org/kenh/htv4.m3u8
 #EXTINF:-1 tvg-id="tuyenquang" tvg-logo="https://freem3u.xyz/static/images/diaphuong/tuyenquang.png" group-title="Địa phương",Tuyên Quang TV
 https://blvbatman.dpdns.org/kenh/tuyenquang.m3u8
 #EXTINF:-1 tvg-id="caobang" tvg-logo="https://freem3u.xyz/static/images/diaphuong/caobang.png" group-title="Địa phương",Cao Bằng TV
