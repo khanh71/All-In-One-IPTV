@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-IPTV Auto-updater
+IPTV Auto-updater (Fixed & Optimized)
 - Nguồn: 1.org.vn/vmttv (ưu tiên) + fallback GitHub
 - Chỉ lấy kênh TV: VTV, HTV, địa phương
 - Lịch phát sóng (EPG): vnepg.site/epg.xml.gz
@@ -21,9 +21,7 @@ import requests
 # ──────────────────────────────────────────────────────────────────────
 # CẤU HÌNH
 # ──────────────────────────────────────────────────────────────────────
-SOURCES = [
-    "https://1.org.vn/vmttv"
-]
+SOURCES = ["https://1.org.vn/vmttv"]
 
 EPG_URLS = [
     "https://vnepg.site/epg.xml.gz",
@@ -33,7 +31,9 @@ EPG_URLS = [
 OUTPUT_FILE = "http-iptv.m3u"
 LINK_CHECK_TIMEOUT = 8
 LINK_CHECK_WORKERS = 40
-HTTP_HEADERS = {"User-Agent": "Mozilla/5.0"}
+HTTP_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
 
 # ──────────────────────────────────────────────────────────────────────
 # BẢNG TÊN ĐẸP  tvg-id → tên hiển thị
@@ -190,76 +190,11 @@ GROUP_MAP: dict[str, str] = {
     "VTV": "VTV",
     "HTV": "HTV",
     "HTV/HTVC": "HTV",
-    # Địa phương tỉnh thành (1.org.vn)
-    "Hà Giang": "Hà Giang",
-    "Tuyên Quang": "Tuyên Quang",
-    "Cao Bằng": "Cao Bằng",
-    "Lạng Sơn": "Lạng Sơn",
-    "Bắc Kạn": "Bắc Kạn",
-    "Thái Nguyên": "Thái Nguyên",
-    "Quảng Ninh": "Quảng Ninh",
-    "Bắc Giang": "Bắc Giang",
-    "Bắc Ninh": "Bắc Ninh",
-    "Lào Cai": "Lào Cai",
-    "Yên Bái": "Yên Bái",
-    "Phú Thọ": "Phú Thọ",
-    "Vĩnh Phúc": "Vĩnh Phúc",
-    "Hà Nội": "Hà Nội",
-    "Hòa Bình": "Hòa Bình",
-    "Sơn La": "Sơn La",
-    "Điện Biên": "Điện Biên",
-    "Lai Châu": "Lai Châu",
-    "Hải Phòng": "Hải Phòng",
-    "Hải Dương": "Hải Dương",
-    "Hưng Yên": "Hưng Yên",
-    "Thái Bình": "Thái Bình",
-    "Nam Định": "Nam Định",
-    "Hà Nam": "Hà Nam",
-    "Ninh Bình": "Ninh Bình",
-    "Thanh Hóa": "Thanh Hóa",
-    "Nghệ An": "Nghệ An",
-    "Hà Tĩnh": "Hà Tĩnh",
-    "Quảng Bình": "Quảng Bình",
-    "Quảng Trị": "Quảng Trị",
-    "Thừa Thiên Huế": "Thừa Thiên Huế",
-    "Đà Nẵng": "Đà Nẵng",
-    "Quảng Nam": "Quảng Nam",
-    "Quảng Ngãi": "Quảng Ngãi",
-    "Bình Định": "Bình Định",
-    "Phú Yên": "Phú Yên",
-    "Khánh Hòa": "Khánh Hòa",
-    "Ninh Thuận": "Ninh Thuận",
-    "Bình Thuận": "Bình Thuận",
-    "Kon Tum": "Kon Tum",
-    "Gia Lai": "Gia Lai",
-    "Đắk Lắk": "Đắk Lắk",
-    "Đắk Nông": "Đắk Nông",
-    "Lâm Đồng": "Lâm Đồng",
-    "Bình Phước": "Bình Phước",
-    "Tây Ninh": "Tây Ninh",
-    "Bình Dương": "Bình Dương",
-    "Đồng Nai": "Đồng Nai",
-    "Bà Rịa - Vũng Tàu": "Bà Rịa - Vũng Tàu",
-    "Long An": "Long An",
-    "Tiền Giang": "Tiền Giang",
-    "Bến Tre": "Bến Tre",
-    "Đồng Tháp": "Đồng Tháp",
-    "Vĩnh Long": "Vĩnh Long",
-    "Trà Vinh": "Trà Vinh",
-    "An Giang": "An Giang",
-    "Kiên Giang": "Kiên Giang",
-    "Cần Thơ": "Cần Thơ",
-    "Hậu Giang": "Hậu Giang",
-    "Sóc Trăng": "Sóc Trăng",
-    "Bạc Liêu": "Bạc Liêu",
-    "Cà Mau": "Cà Mau",
-    # Quốc phòng
-    "Quốc Phòng": "Quốc Phòng",
-    # Các nhóm fallback (blvbatman, ntd249)
     "Địa Phương": "_LOCAL_",
     "Địa phương (HD)": "_LOCAL_",
     "Địa phương (SD)": "_LOCAL_",
     "Kênh TH Thiết yếu": "_LOCAL_",
+    "Quốc Phòng": "Quốc Phòng",
 }
 
 # tvg-id → tỉnh (dùng khi group = _LOCAL_)
@@ -363,13 +298,8 @@ TVGID_TO_PROVINCE: dict[str, Optional[str]] = {
     "antv": "Quốc Phòng",
     "qpvn-hd": "Quốc Phòng",
     "qpvn": "Quốc Phòng",
-    # bỏ
-    "hitv": None,
-    "youtv": None,
-    "htvkey": None,
 }
 
-# Thứ tự tỉnh Bắc → Nam
 LOCAL_PROVINCE_ORDER: list[str] = [
     "Hà Giang",
     "Tuyên Quang",
@@ -439,9 +369,6 @@ _PROVINCE_IDX: dict[str, int] = {p: i for i, p in enumerate(LOCAL_PROVINCE_ORDER
 
 GROUP_LABEL_LOCAL = "Địa phương"
 
-# ──────────────────────────────────────────────────────────────────────
-# SORT ORDER CỐ ĐỊNH
-# ──────────────────────────────────────────────────────────────────────
 VTV_FIXED_ORDER = [
     "VTV1",
     "VTV2",
@@ -483,9 +410,6 @@ _VTV_IDX = {_norm(n): i for i, n in enumerate(VTV_FIXED_ORDER)}
 _HTV_IDX = {_norm(n): i for i, n in enumerate(HTV_FIXED_ORDER)}
 
 
-# ──────────────────────────────────────────────────────────────────────
-# DATA CLASS
-# ──────────────────────────────────────────────────────────────────────
 @dataclass
 class Channel:
     name: str
@@ -503,9 +427,6 @@ def _dedup_key(name: str) -> str:
     return re.sub(r"[\s\-\._]+", "", name.lower())
 
 
-# ──────────────────────────────────────────────────────────────────────
-# QUALITY
-# ──────────────────────────────────────────────────────────────────────
 _QUALITY_TIERS = [
     (re.compile(r"\b8k\b", re.I), 80),
     (re.compile(r"\b4k\b|\buhd\b", re.I), 70),
@@ -526,36 +447,17 @@ def quality_score(raw: str) -> tuple[int, float]:
     return tier, float(m.group(1)) if m else 0.0
 
 
-# ──────────────────────────────────────────────────────────────────────
-# FETCH
-# ──────────────────────────────────────────────────────────────────────
 def fetch(url: str, timeout: int = 20) -> Optional[str]:
     try:
         r = requests.get(url, timeout=timeout, headers=HTTP_HEADERS)
         r.raise_for_status()
-        if len(r.text) < 50:
-            return None
         return r.text
     except Exception as e:
         print(f"  ⚠  {url}: {e}", file=sys.stderr)
         return None
 
 
-def fetch_bytes(url: str, timeout: int = 30) -> Optional[bytes]:
-    try:
-        r = requests.get(url, timeout=timeout, headers=HTTP_HEADERS)
-        r.raise_for_status()
-        return r.content
-    except Exception as e:
-        print(f"  ⚠  {url}: {e}", file=sys.stderr)
-        return None
-
-
-# ──────────────────────────────────────────────────────────────────────
-# EPG  — tải và nhúng trực tiếp vào file M3U (url-tvg header)
-# ──────────────────────────────────────────────────────────────────────
 def resolve_epg_url() -> str:
-    """Trả về EPG URL hoạt động, hoặc chuỗi rỗng nếu không có."""
     for url in EPG_URLS:
         try:
             r = requests.get(url, timeout=15, headers=HTTP_HEADERS, stream=True)
@@ -570,14 +472,8 @@ def resolve_epg_url() -> str:
     return ""
 
 
-# ──────────────────────────────────────────────────────────────────────
-# PARSE M3U
-# ──────────────────────────────────────────────────────────────────────
 _NOISE_RE = re.compile(
-    r"[\s\-–|]*\b(?:fhd|full\s*hd|hd|sd|4k|8k|uhd"
-    r"|h\.?264|h\.?265|hevc|avc"
-    r"|\d+(?:\.\d+)?\s*mb(?:ps)?"
-    r"|\d+\s*kbps)\b.*$",
+    r"[\s\-–|]*\b(?:fhd|full\s*hd|hd|sd|4k|8k|uhd|h\.?264|h\.?265|hevc|avc|\d+(?:\.\d+)?\s*mb(?:ps)?|\d+\s*kbps)\b.*$",
     re.IGNORECASE,
 )
 
@@ -610,48 +506,61 @@ def parse_m3u(text: str) -> list[Channel]:
                 i += 1
                 continue
 
-            tvg_id = (
-                (
-                    re.search(r'tvg-id="([^"]*)"', line)
-                    or type("", (), {"group": lambda s, x: ""})()
-                )
-                .group(1)
-                .strip()
-            )
-            tvg_logo = (
-                (
-                    re.search(r'tvg-logo="([^"]*)"', line)
-                    or type("", (), {"group": lambda s, x: ""})()
-                )
-                .group(1)
-                .strip()
-            )
-            src_grp = (
-                (
-                    re.search(r'group-title="([^"]*)"', line)
-                    or type("", (), {"group": lambda s, x: ""})()
-                )
-                .group(1)
-                .strip()
-            )
-            raw_name = line.split(",", 1)[-1].strip() if "," in line else ""
-
-            # Dùng regex match thực tế
+            # SỬA LỖI 1: Ép tvg-id về chữ thường để so khớp chính xác với Dictionary
             m_id = re.search(r'tvg-id="([^"]*)"', line)
+            tvg_id = m_id.group(1).strip().lower() if m_id else ""
+
             m_logo = re.search(r'tvg-logo="([^"]*)"', line)
-            m_grp = re.search(r'group-title="([^"]*)"', line)
-            tvg_id = m_id.group(1).strip() if m_id else ""
             tvg_logo = m_logo.group(1).strip() if m_logo else ""
+
+            m_grp = re.search(r'group-title="([^"]*)"', line)
             src_grp = m_grp.group(1).strip() if m_grp else ""
+            raw_name = line.split(",", 1)[-1].strip() if "," in line else ""
 
             if not raw_name:
                 i += 1
                 continue
 
-            mapped = GROUP_MAP.get(src_grp)
-            if mapped is None:
+            # --- CHẶN CÁC KÊNH ON TRÀ TRỘN VÀO NHÓM VTV ---
+            # Nếu id bắt đầu bằng "on" (ví dụ: onbibi) hoặc tên bắt đầu bằng "ON "
+            if tvg_id.startswith("on") or raw_name.strip().upper().startswith("ON "):
                 i += 1
                 continue
+            # ----------------------------------------------
+
+            # Tìm kiếm group linh hoạt theo từ khóa thay vì khớp 100%
+            src_grp_lower = src_grp.lower()
+            mapped = None
+            if "vtv" in src_grp_lower:
+                mapped = "VTV"
+            elif "htv" in src_grp_lower:
+                mapped = "HTV"
+            elif any(
+                kw in src_grp_lower
+                for kw in [
+                    "địa phương",
+                    "dia phuong",
+                    "tỉnh",
+                    "tinh",
+                    "thiết yếu",
+                    "thiet yeu",
+                ]
+            ):
+                mapped = "_LOCAL_"
+            else:
+                mapped = GROUP_MAP.get(src_grp)
+
+            # CƠ CHẾ FALLBACK: Nếu group-title trống hoặc lạ nhưng tvg-id thuộc list nhận diện, vẫn giữ lại
+            if mapped is None:
+                if tvg_id.startswith("vtv"):
+                    mapped = "VTV"
+                elif tvg_id.startswith("htv") or tvg_id.startswith("htvc"):
+                    mapped = "HTV"
+                elif tvg_id in TVGID_TO_PROVINCE:
+                    mapped = "_LOCAL_"
+                else:
+                    i += 1
+                    continue
 
             if mapped == "_LOCAL_":
                 province = TVGID_TO_PROVINCE.get(tvg_id)
@@ -687,17 +596,19 @@ def parse_m3u(text: str) -> list[Channel]:
     return channels
 
 
-# ──────────────────────────────────────────────────────────────────────
-# LINK CHECK
-# ──────────────────────────────────────────────────────────────────────
 def _is_live(url: str) -> bool:
     if not url.startswith(("http://", "https://")):
         return True
     try:
-        r = requests.head(
-            url, timeout=LINK_CHECK_TIMEOUT, headers=HTTP_HEADERS, allow_redirects=True
-        )
-        return r.status_code not in (404, 410)
+        # SỬA LỖI 3: Dùng GET + stream=True thay thế cho HEAD để bypass các server chặn HEAD request
+        with requests.get(
+            url,
+            timeout=LINK_CHECK_TIMEOUT,
+            headers=HTTP_HEADERS,
+            stream=True,
+            allow_redirects=True,
+        ) as r:
+            return r.status_code < 400
     except Exception:
         return False
 
@@ -750,9 +661,6 @@ def pick_best(channels: list[Channel]) -> list[Channel]:
     return result
 
 
-# ──────────────────────────────────────────────────────────────────────
-# MERGE & SORT
-# ──────────────────────────────────────────────────────────────────────
 def merge_sources(lists: list[list[Channel]]) -> list[Channel]:
     seen: dict[str, Channel] = {}
     for channels in lists:
@@ -777,9 +685,6 @@ def sort_channels(channels: list[Channel]) -> list[Channel]:
     return sorted(channels, key=_sort_key)
 
 
-# ──────────────────────────────────────────────────────────────────────
-# WRITE M3U
-# ──────────────────────────────────────────────────────────────────────
 def write_m3u(channels: list[Channel], path: str, epg_url: str) -> None:
     with open(path, "w", encoding="utf-8") as f:
         if epg_url:
@@ -787,21 +692,12 @@ def write_m3u(channels: list[Channel], path: str, epg_url: str) -> None:
         else:
             f.write("#EXTM3U\n")
         for ch in channels:
-            attrs = (
-                f'tvg-id="{ch.tvg_id}" '
-                f'tvg-logo="{ch.tvg_logo}" '
-                f'group-title="{ch.group_label}"'
-            )
+            attrs = f'tvg-id="{ch.tvg_id}" tvg-logo="{ch.tvg_logo}" group-title="{ch.group_label}"'
             f.write(f"#EXTINF:-1 {attrs},{ch.name}\n")
             f.write(ch.url + "\n")
     print(f"✅  Đã ghi {len(channels)} kênh → {path}")
-    if epg_url:
-        print(f"    EPG: {epg_url}")
 
 
-# ──────────────────────────────────────────────────────────────────────
-# MAIN
-# ──────────────────────────────────────────────────────────────────────
 _TIER = {80: "8K", 70: "4K", 60: "FHD", 50: "HD", 40: "~HD", 20: "SD"}
 
 
@@ -813,10 +709,13 @@ def main():
     for idx, src in enumerate(SOURCES, 1):
         print(f"\n[{idx}/{len(SOURCES)}] Tải: {src}")
         text = fetch(src)
-        if not text or "#EXTM3U" not in text[:300]:
+
+        # SỬA LỖI 4: Bỏ giới hạn text[:300] để tránh lỗi cấu trúc header m3u dài
+        if not text or "#EXTM3U" not in text:
             print("  ⚠  Bỏ qua (không phải M3U hợp lệ)")
             processed.append([])
             continue
+
         parsed = parse_m3u(text)
         print(f"     Nhận diện {len(parsed)} kênh TV")
         if not parsed:
@@ -836,17 +735,6 @@ def main():
     )
 
     write_m3u(final, OUTPUT_FILE, epg_url)
-
-    print("\n📺  Danh sách:")
-    cur = None
-    for i, ch in enumerate(final, 1):
-        if ch.group_label != cur:
-            cur = ch.group_label
-            print(f"\n  ── {cur} ({gcnt[cur]}) ──")
-        tier = _TIER.get(ch.quality[0], "?")
-        mbps = f" {ch.quality[1]:.0f}M" if ch.quality[1] else ""
-        prov = f" [{ch.province}]" if ch.province else ""
-        print(f"  {i:3}. {ch.name:<35} [{tier}{mbps}]{prov}")
 
 
 if __name__ == "__main__":
