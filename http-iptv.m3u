@@ -77,8 +77,6 @@ https://live.fptplay53.net/fnxsd1/phutho_hls.smil/chunklist_b2500000.m3u8
 https://live.fptplay53.net/fnxhd2/hanoitv1_vhls.smil/chunklist_b5000000.m3u8
 #EXTINF:-1 tvg-id="hanoi2" tvg-logo="https://i.postimg.cc/Nft4rJgS/Hanoi-TV2.png" group-title="Địa phương",Hà Nội 2
 https://live.fptplay53.net/fnxhd1/hntv2_vhls.smil/chunklist_b5000000.m3u8
-#EXTINF:-1 tvg-id="vovgthn" tvg-logo="https://i.imgur.com/Wu8zN9H.png" group-title="Địa phương",VOV Giao Thông HN
-https://play.vovgiaothong.vn/live/gthn/playlist.m3u8
 #EXTINF:-1 tvg-id="sonla" tvg-logo="https://i.imgur.com/pCTJQMX.png" group-title="Địa phương",Sơn La
 https://live.fptplay53.net/fnxsd1/sonla_hls.smil/chunklist_b2500000.m3u8
 #EXTINF:-1 tvg-id="dienbien" tvg-logo="https://i.imgur.com/hMDRDxN.png" group-title="Địa phương",Điện Biên
