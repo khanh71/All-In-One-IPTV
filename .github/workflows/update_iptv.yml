@@ -31,7 +31,7 @@ jobs:
         run: ls -la
 
       - name: Run IPTV updater
-        run: python update_iptv.py
+        run: python scripts/update_iptv.py
 
       - name: Commit & push http-iptv.m3u
         run: |
