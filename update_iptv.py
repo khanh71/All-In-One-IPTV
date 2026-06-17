@@ -5,6 +5,8 @@ IPTV Auto-updater (Production Ready - Optimized)
 - Chỉ lấy kênh TV: VTV, HTV, địa phương
 - Lịch phát sóng (EPG): vnepg.site/epg.xml.gz
 - Địa phương gom 1 nhóm, sắp xếp Bắc → Nam
+- tvg-id chuẩn hóa theo vnepg (viết liền, không dấu gạch nối)
+- Header M3U: EPG sources trước, IPTV sources sau
 - Output: http-iptv.m3u
 """
 
@@ -47,9 +49,62 @@ HTTP_HEADERS: Final[dict[str, str]] = {
 GLOBAL_TIMEOUT: Final[int] = 20
 
 # ──────────────────────────────────────────────────────────────────────
-# BẢNG TÊN ĐẸP (tvg-id → tên hiển thị)
-# FIX #5: Gộp alias trùng (vtv6/vtv6hd → VTV6, vtv10/vtv10hd → VTV10)
-#         thành một entry mỗi cái. Alias phụ được xử lý bởi regex fallback.
+# CHUẨN HÓA TVG-ID THEO VNEPG
+# Map từ tvg-id gốc (có thể có dấu gạch ngang, alias) → tvg-id chuẩn vnepg
+# Quy tắc vnepg: viết liền, không dấu gạch ngang, không khoảng trắng
+# ──────────────────────────────────────────────────────────────────────
+TVG_ID_MAP: Final[dict[str, str]] = {
+    # VTV — alias không có hd
+    "vtv6": "vtv6hd",
+    "vtv10": "vtv10hd",
+    # HTV — vnepg dùng htv1hd, htv3hd
+    "htv1": "htv1hd",
+    "htv3": "htv3hd",
+    "htv4": "htv4hd",
+    # HTVC — vnepg dùng htvccanachd, htvcthuanviethd
+    "htvccanhachd": "htvccanachd",
+    "htvcthuanviet": "htvcthuanviethd",
+    # Quốc phòng — bỏ dấu gạch ngang
+    "antv-hd": "antv",
+    "qpvn-hd": "qpvn",
+    # Địa phương — vnepg không dùng số hậu tố cho kênh chính
+    "danang1": "danang",
+    "tayninh1": "tayninh",
+    "tayninhtv": "tayninh",
+    "dongnai1": "dongnai",
+    "dongthap1": "dongthap",
+    "cantho1": "cantho",
+    "khanhhoa1": "khanhhoa",
+    "quangngai1": "quangngai",
+    # Alias khác
+    "ltv": "laichau",
+    "vovgthn": "hanoi1",
+    # thvl → vinhlong (vnepg dùng vinhlong*)
+    "thvl1hd": "vinhlong1hd",
+    "thvl1": "vinhlong1hd",
+    "thvl2hd": "vinhlong2hd",
+    "thvl2": "vinhlong2hd",
+    "thvl3hd": "vinhlong3hd",
+    "thvl3": "vinhlong3hd",
+    "thvl4hd": "vinhlong4hd",
+    "thvl4": "vinhlong4hd",
+    "thvl5hd": "vinhlong5hd",
+    "thvl5": "vinhlong5hd",
+}
+
+
+def normalize_tvg_id(raw_id: str) -> str:
+    """Chuẩn hóa tvg-id: map alias → chuẩn vnepg, fallback bỏ dấu gạch ngang."""
+    clean = raw_id.strip().lower()
+    if clean in TVG_ID_MAP:
+        return TVG_ID_MAP[clean]
+    # Bỏ dấu gạch ngang nếu chưa có trong map (antv-hd → antv, ...)
+    return clean.replace("-", "")
+
+
+# ──────────────────────────────────────────────────────────────────────
+# BẢNG TÊN ĐẸP (tvg-id chuẩn vnepg → tên hiển thị)
+# Tất cả key đã dùng tvg-id chuẩn (viết liền, không dấu gạch ngang)
 # ──────────────────────────────────────────────────────────────────────
 DISPLAY_NAME: Final[dict[str, str]] = {
     # VTV
@@ -61,39 +116,34 @@ DISPLAY_NAME: Final[dict[str, str]] = {
     "vtv5hdtnb": "VTV5 Tây Nam Bộ",
     "vtv5hdtn": "VTV5 Tây Nguyên",
     "vtv6hd": "VTV6",
-    "vtv6": "VTV6",
     "vtv7hd": "VTV7",
     "vtv8hd": "VTV8",
     "vtv9hd": "VTV9",
     "vtv10hd": "VTV10",
-    "vtv10": "VTV10",
     "vietnamtoday": "Vietnam Today",
-    # HTV / HTVC
-    "htv1": "HTV1",
+    # HTV / HTVC — key theo chuẩn vnepg
+    "htv1hd": "HTV1",
     "htv2hd": "HTV2",
-    "htv3": "HTV3",
-    "htv4": "HTV4",
+    "htv3hd": "HTV3",
     "htv4hd": "HTV4",
     "htv5": "HTV5",
     "htv7hd": "HTV7",
     "htv9hd": "HTV9",
     "htvthethaohd": "HTVC Thể Thao",
-    "htvccanhachd": "HTVC Ca Nhạc",
+    "htvccanachd": "HTVC Ca Nhạc",
     "htvcdulichhd": "HTVC Du Lịch",
     "htvcgiadinhhd": "HTVC Gia Đình",
     "htvcphimhd": "HTVC Phim",
     "htvcphunuhd": "HTVC Phụ Nữ",
-    "htvcthuanviet": "HTVC Thuần Việt",
+    "htvcthuanviethd": "HTVC Thuần Việt",
     "htvcplushd": "HTVC+",
     # Miền Bắc
     "hagiang": "Hà Giang",
     "laichau": "Lai Châu",
-    "ltv": "Lai Châu",
     "dienbien": "Điện Biên",
     "laocai": "Lào Cai",
     "yenbai": "Yên Bái",
     "sonla": "Sơn La",
-    "hoabinh": "Hòa Bình",
     "phutho": "Phú Thọ",
     "vinhphuc": "Vĩnh Phúc",
     "tuyenquang": "Tuyên Quang",
@@ -102,13 +152,11 @@ DISPLAY_NAME: Final[dict[str, str]] = {
     "caobang": "Cao Bằng",
     "langson": "Lạng Sơn",
     "quangninh": "Quảng Ninh",
-    "quangninh1": "Quảng Ninh 1",
     "quangninh3": "Quảng Ninh 3",
     "bacgiang": "Bắc Giang",
     "bacninh": "Bắc Ninh",
     "hanoi1": "Hà Nội 1",
     "hanoi2": "Hà Nội 2",
-    "vovgthn": "VOV Giao Thông HN",
     "haiphong": "Hải Phòng",
     "haiphong3": "Hải Phòng 3",
     "haiphongplus": "Hải Phòng +",
@@ -125,17 +173,14 @@ DISPLAY_NAME: Final[dict[str, str]] = {
     "quangbinh": "Quảng Bình",
     "quangtri": "Quảng Trị",
     "hue": "Huế",
-    "danang1": "Đà Nẵng 1",
+    "danang": "Đà Nẵng",
     "danang2": "Đà Nẵng 2",
     "quangnam": "Quảng Nam",
-    # FIX #6: Phân biệt rõ quangngai (gốc) vs quangngai1 (kênh 1)
     "quangngai": "Quảng Ngãi",
-    "quangngai1": "Quảng Ngãi 1",
     "quangngai2": "Quảng Ngãi 2",
     "binhdinh": "Bình Định",
     "phuyen": "Phú Yên",
     "khanhhoa": "Khánh Hòa",
-    "khanhhoa1": "Khánh Hòa 1",
     "ninhthuan": "Ninh Thuận",
     "binhthuan": "Bình Thuận",
     # Tây Nguyên
@@ -144,63 +189,45 @@ DISPLAY_NAME: Final[dict[str, str]] = {
     "daklak": "Đắk Lắk",
     "daknong": "Đắk Nông",
     "lamdong": "Lâm Đồng",
-    "lamdong1": "Lâm Đồng 1",
     "lamdong2": "Lâm Đồng 2",
-    "lamdong3": "Lâm Đồng 3",
     # Miền Nam
     "binhphuoc": "Bình Phước",
-    "tayninh1": "Tây Ninh",
-    "tayninhtv": "Tây Ninh",
+    "tayninh": "Tây Ninh",
     "binhduong": "Bình Dương",
-    "dongnai1": "Đồng Nai 1",
+    "dongnai": "Đồng Nai",
     "dongnai2": "Đồng Nai 2",
     "dongnai3": "Đồng Nai 3",
     "baria": "Bà Rịa - Vũng Tàu",
     "longan": "Long An",
     "tiengiang": "Tiền Giang",
     "bentre": "Bến Tre",
-    "dongthap": "Đồng Tháp 1",
-    "dongthap1": "Đồng Tháp 1",
+    "dongthap": "Đồng Tháp",
     "dongthap2": "Đồng Tháp 2",
     "vinhlong1hd": "Vĩnh Long 1",
-    "thvl1hd": "Vĩnh Long 1",
-    "thvl1": "Vĩnh Long 1",
     "vinhlong2hd": "Vĩnh Long 2",
-    "thvl2hd": "Vĩnh Long 2",
-    "thvl2": "Vĩnh Long 2",
     "vinhlong3hd": "Vĩnh Long 3",
-    "thvl3hd": "Vĩnh Long 3",
-    "thvl3": "Vĩnh Long 3",
     "vinhlong4hd": "Vĩnh Long 4",
-    "thvl4hd": "Vĩnh Long 4",
-    "thvl4": "Vĩnh Long 4",
     "vinhlong5hd": "Vĩnh Long 5",
-    "thvl5hd": "Vĩnh Long 5",
-    "thvl5": "Vĩnh Long 5",
     "travinh": "Trà Vinh",
     "angiang1": "An Giang 1",
     "angiang2": "An Giang 2",
     "angiang3": "An Giang 3",
     "kiengiang": "Kiên Giang",
     "cantho": "Cần Thơ",
-    "cantho1": "Cần Thơ 1",
     "cantho2": "Cần Thơ 2",
     "cantho3": "Cần Thơ 3",
     "haugiang": "Hậu Giang",
     "soctrang": "Sóc Trăng",
     "baclieu": "Bạc Liêu",
     "camau": "Cà Mau",
-    # Quốc phòng — FIX #1: Tách riêng khỏi TVGID_TO_PROVINCE (không phải tỉnh)
-    "antv-hd": "ANTV",
+    # Quốc phòng
     "antv": "ANTV",
-    "qpvn-hd": "QPVN",
     "qpvn": "QPVN",
 }
 
 # ──────────────────────────────────────────────────────────────────────
 # FIX #8: Gộp GROUP_MAP — chỉ giữ entries không bị xử lý bởi keyword
-#         fallback bên dưới để tránh dead code. Keyword-based matching
-#         trong parse_m3u đã xử lý "vtv", "htv", "địa phương", etc.
+#         fallback bên dưới để tránh dead code.
 # ──────────────────────────────────────────────────────────────────────
 GROUP_MAP: Final[dict[str, str]] = {
     "Quốc Phòng": "Quốc Phòng",
@@ -212,6 +239,7 @@ GROUP_MAP: Final[dict[str, str]] = {
 #         qua GROUP "Quốc Phòng" chứ không phải qua province lookup.
 # ──────────────────────────────────────────────────────────────────────
 TVGID_TO_PROVINCE: Final[dict[str, str]] = {
+    # Key là tvg-id đã chuẩn hóa theo vnepg (sau khi qua normalize_tvg_id)
     "hagiang": "Hà Giang",
     "tuyenquang": "Tuyên Quang",
     "caobang": "Cao Bằng",
@@ -219,7 +247,6 @@ TVGID_TO_PROVINCE: Final[dict[str, str]] = {
     "backan": "Bắc Kạn",
     "thainguyen": "Thái Nguyên",
     "quangninh": "Quảng Ninh",
-    "quangninh1": "Quảng Ninh",
     "quangninh3": "Quảng Ninh",
     "bacgiang": "Bắc Giang",
     "bacninh": "Bắc Ninh",
@@ -229,12 +256,9 @@ TVGID_TO_PROVINCE: Final[dict[str, str]] = {
     "vinhphuc": "Vĩnh Phúc",
     "hanoi1": "Hà Nội",
     "hanoi2": "Hà Nội",
-    "vovgthn": "Hà Nội",
-    "hoabinh": "Hòa Bình",
     "sonla": "Sơn La",
     "dienbien": "Điện Biên",
     "laichau": "Lai Châu",
-    "ltv": "Lai Châu",
     "haiphong": "Hải Phòng",
     "haiphong3": "Hải Phòng",
     "haiphongplus": "Hải Phòng",
@@ -250,16 +274,13 @@ TVGID_TO_PROVINCE: Final[dict[str, str]] = {
     "quangbinh": "Quảng Bình",
     "quangtri": "Quảng Trị",
     "hue": "Thừa Thiên Huế",
-    "danang1": "Đà Nẵng",
     "danang2": "Đà Nẵng",
     "quangnam": "Quảng Nam",
     "quangngai": "Quảng Ngãi",
-    "quangngai1": "Quảng Ngãi",
     "quangngai2": "Quảng Ngãi",
     "binhdinh": "Bình Định",
     "phuyen": "Phú Yên",
     "khanhhoa": "Khánh Hòa",
-    "khanhhoa1": "Khánh Hòa",
     "ninhthuan": "Ninh Thuận",
     "binhthuan": "Bình Thuận",
     "kontum": "Kon Tum",
@@ -267,14 +288,9 @@ TVGID_TO_PROVINCE: Final[dict[str, str]] = {
     "daklak": "Đắk Lắk",
     "daknong": "Đắk Nông",
     "lamdong": "Lâm Đồng",
-    "lamdong1": "Lâm Đồng",
     "lamdong2": "Lâm Đồng",
-    "lamdong3": "Lâm Đồng",
     "binhphuoc": "Bình Phước",
-    "tayninh1": "Tây Ninh",
-    "tayninhtv": "Tây Ninh",
     "binhduong": "Bình Dương",
-    "dongnai1": "Đồng Nai",
     "dongnai2": "Đồng Nai",
     "dongnai3": "Đồng Nai",
     "baria": "Bà Rịa - Vũng Tàu",
@@ -282,30 +298,18 @@ TVGID_TO_PROVINCE: Final[dict[str, str]] = {
     "tiengiang": "Tiền Giang",
     "bentre": "Bến Tre",
     "dongthap": "Đồng Tháp",
-    "dongthap1": "Đồng Tháp",
     "dongthap2": "Đồng Tháp",
     "vinhlong1hd": "Vĩnh Long",
     "vinhlong2hd": "Vĩnh Long",
     "vinhlong3hd": "Vĩnh Long",
     "vinhlong4hd": "Vĩnh Long",
     "vinhlong5hd": "Vĩnh Long",
-    "thvl1hd": "Vĩnh Long",
-    "thvl1": "Vĩnh Long",
-    "thvl2hd": "Vĩnh Long",
-    "thvl2": "Vĩnh Long",
-    "thvl3hd": "Vĩnh Long",
-    "thvl3": "Vĩnh Long",
-    "thvl4hd": "Vĩnh Long",
-    "thvl4": "Vĩnh Long",
-    "thvl5hd": "Vĩnh Long",
-    "thvl5": "Vĩnh Long",
     "travinh": "Trà Vinh",
     "angiang1": "An Giang",
     "angiang2": "An Giang",
     "angiang3": "An Giang",
     "kiengiang": "Kiên Giang",
     "cantho": "Cần Thơ",
-    "cantho1": "Cần Thơ",
     "cantho2": "Cần Thơ",
     "cantho3": "Cần Thơ",
     "haugiang": "Hậu Giang",
@@ -573,7 +577,7 @@ def parse_m3u(text: str) -> list["Channel"]:
 
             # Trích xuất metadata bằng pre-compiled regex
             m_id = _TVG_ID_RE.search(extinf_line)
-            tvg_id = m_id.group(1).strip().lower() if m_id else ""
+            tvg_id = normalize_tvg_id(m_id.group(1)) if m_id else ""
 
             m_logo = _TVG_LOGO_RE.search(extinf_line)
             tvg_logo = m_logo.group(1).strip() if m_logo else ""
@@ -591,7 +595,10 @@ def parse_m3u(text: str) -> list["Channel"]:
             upper_name = raw_name.upper()
             if tvg_id.startswith("on") or upper_name.startswith("ON "):
                 continue
-            if any(kw in upper_name for kw in ["SỰ KIỆN", "VTVPRIME", "FPT", "VOV"]):
+            if any(
+                kw in upper_name
+                for kw in ["SỰ KIỆN", "VTVPRIME", "FPT", "VOV", "VTVCAB", "SPOTV", "O2"]
+            ):
                 continue
 
             # ── NHẬN DIỆN GROUP ───────────────────────────────────────
@@ -627,7 +634,7 @@ def parse_m3u(text: str) -> list["Channel"]:
                 elif tvg_id.startswith("htv") or tvg_id.startswith("htvc"):
                     mapped = "HTV"
                 # FIX #1: Nhận diện ANTV/QPVN qua tvg-id TRƯỚC khi check province
-                elif tvg_id in ("antv", "antv-hd", "qpvn", "qpvn-hd"):
+                elif tvg_id in ("antv", "qpvn"):  # đã normalize, không còn dạng -hd
                     mapped = "Quốc Phòng"
                 elif tvg_id in TVGID_TO_PROVINCE:
                     mapped = "_LOCAL_"
@@ -680,14 +687,23 @@ def pick_best(channels: list[Channel]) -> list[Channel]:
     Single-pass Max Selection O(N): chọn kênh chất lượng cao nhất mỗi tên.
     Tuple (tier, bitrate) được so sánh trực tiếp — tier cao hơn luôn thắng,
     rồi mới xét bitrate.
+    Nếu trùng URL (link stream), chỉ giữ lại một kênh.
     """
     best_channels: dict[str, Channel] = {}
+    seen_urls: set[str] = set()
 
     for ch in channels:
+        url_norm = ch.url.strip()
+        if url_norm in seen_urls:
+            continue  # Trùng link → bỏ qua
         key = _dedup_key(ch.name)
         existing = best_channels.get(key)
         if existing is None or ch.quality > existing.quality:
+            # Nếu thay thế kênh cũ, giải phóng URL cũ khỏi seen_urls
+            if existing is not None:
+                seen_urls.discard(existing.url.strip())
             best_channels[key] = ch
+            seen_urls.add(url_norm)
 
     result = list(best_channels.values())
     print(f"     → Đã gộp và lấy {len(result)} kênh chất lượng tốt nhất")
@@ -699,16 +715,26 @@ def merge_sources(lists: list[list[Channel]]) -> list[Channel]:
     FIX #4: Gộp các nguồn với so sánh chất lượng, không phải "first-wins".
     Nguồn đầu tiên vẫn được ưu tiên (priority source), nhưng nếu nguồn sau
     có cùng kênh với quality cao hơn thì thay thế.
+    Nếu trùng URL (link stream) giữa các nguồn, chỉ giữ lại một kênh.
     """
     seen: dict[str, Channel] = {}
+    seen_urls: set[str] = set()
+
     for channels in lists:
         for ch in channels:
+            url_norm = ch.url.strip()
+            if url_norm in seen_urls:
+                continue  # Trùng link → bỏ qua
             k = _dedup_key(ch.name)
             existing = seen.get(k)
             # Giữ kênh từ nguồn ưu tiên nếu quality bằng nhau (first-source-wins tie-break),
             # nhưng thay thế nếu nguồn sau thực sự tốt hơn.
             if existing is None or ch.quality > existing.quality:
+                if existing is not None:
+                    seen_urls.discard(existing.url.strip())
                 seen[k] = ch
+                seen_urls.add(url_norm)
+
     return list(seen.values())
 
 
@@ -732,12 +758,36 @@ def sort_channels(channels: list[Channel]) -> list[Channel]:
     return sorted(channels, key=_sort_key)
 
 
-def write_m3u(channels: list[Channel], path: str, epg_url: str) -> None:
-    """Ghi file M3U ra disk. Bắt IOError riêng để không crash silent."""
+def write_m3u(
+    channels: list[Channel],
+    path: str,
+    epg_url: str,
+    iptv_sources: list[str] | None = None,
+) -> None:
+    """
+    Ghi file M3U ra disk.
+    Header gồm: EPG sources (url-tvg) trước, sau đó x-tvg-url cho từng IPTV source.
+    Thứ tự header đảm bảo player parse EPG trước khi load kênh.
+    """
     try:
         with open(path, "w", encoding="utf-8") as f:
-            header = f'#EXTM3U url-tvg="{epg_url}"\n' if epg_url else "#EXTM3U\n"
-            f.write(header)
+            # ── HEADER ───────────────────────────────────────────────
+            if epg_url:
+                # Dòng 1: EPG chính (url-tvg được hầu hết player nhận)
+                f.write(f'#EXTM3U url-tvg="{epg_url}"\n')
+                # Dòng 2: x-tvg-url cho player hỗ trợ thêm attribute này
+                f.write(f'#EXTM3U x-tvg-url="{epg_url}"\n')
+            else:
+                f.write("#EXTM3U\n")
+
+            # IPTV sources dưới dạng comment — một số player (TiviMate, GSE)
+            # đọc #EXTVLCOPT hoặc comment đặc biệt; ghi dạng #EXTM3U-SOURCE
+            # để dễ debug và một số player hiển thị nguồn.
+            if iptv_sources:
+                for src_url in iptv_sources:
+                    f.write(f"#EXTM3U-SOURCE:{src_url}\n")
+
+            # ── NỘI DUNG KÊNH ─────────────────────────────────────
             for ch in channels:
                 attrs = (
                     f'tvg-id="{ch.tvg_id}" '
@@ -749,7 +799,7 @@ def write_m3u(channels: list[Channel], path: str, epg_url: str) -> None:
         print(f"✅  Đã ghi {len(channels)} kênh → {path}")
     except IOError as e:
         print(f"❌  Lỗi ghi file {path}: {e}", file=sys.stderr)
-        sys.exit(1)  # FIX: Thoát với exit code lỗi thay vì tiếp tục im lặng
+        sys.exit(1)
 
 
 def main() -> None:
@@ -789,7 +839,7 @@ def main() -> None:
         f"| Tổng: {len(final)}"
     )
 
-    write_m3u(final, OUTPUT_FILE, epg_url)
+    write_m3u(final, OUTPUT_FILE, epg_url, iptv_sources=SOURCES)
 
 
 if __name__ == "__main__":
