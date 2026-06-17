@@ -27,10 +27,10 @@ import requests
 SOURCES: Final[list[str]] = [
     "https://1.org.vn/vmttv",
     "https://vmttv.duckdns.org/",
-    "https://raw.githubusercontent.com/vuminhthanh12/vuminhthanh12/refs/heads/main/vmttv",
-    "https://raw.githubusercontent.com/Bacbenny/Truyenhinhiptv/refs/heads/main/dekiki.m3u",
-    "https://raw.githubusercontent.com/Bacbenny/Verceliptv/refs/heads/main/VTV.m3u",
-    "https://raw.githubusercontent.com/hoiquanclick/hoiquan/refs/heads/main/vip.m3u",
+    # "https://raw.githubusercontent.com/vuminhthanh12/vuminhthanh12/refs/heads/main/vmttv",
+    # "https://raw.githubusercontent.com/Bacbenny/Truyenhinhiptv/refs/heads/main/dekiki.m3u",
+    # "https://raw.githubusercontent.com/Bacbenny/Verceliptv/refs/heads/main/VTV.m3u",
+    # "https://raw.githubusercontent.com/hoiquanclick/hoiquan/refs/heads/main/vip.m3u",
 ]
 
 EPG_URLS: Final[list[str]] = [
