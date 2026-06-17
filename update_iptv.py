@@ -27,10 +27,10 @@ import requests
 SOURCES: Final[list[str]] = [
     "https://1.org.vn/vmttv",
     "https://vmttv.duckdns.org/",
-    # "https://raw.githubusercontent.com/vuminhthanh12/vuminhthanh12/refs/heads/main/vmttv",
-    # "https://raw.githubusercontent.com/Bacbenny/Truyenhinhiptv/refs/heads/main/dekiki.m3u",
-    # "https://raw.githubusercontent.com/Bacbenny/Verceliptv/refs/heads/main/VTV.m3u",
-    # "https://raw.githubusercontent.com/hoiquanclick/hoiquan/refs/heads/main/vip.m3u",
+    "https://raw.githubusercontent.com/vuminhthanh12/vuminhthanh12/refs/heads/main/vmttv",
+    "https://raw.githubusercontent.com/Bacbenny/Truyenhinhiptv/refs/heads/main/dekiki.m3u",
+    "https://raw.githubusercontent.com/Bacbenny/Verceliptv/refs/heads/main/VTV.m3u",
+    "https://raw.githubusercontent.com/hoiquanclick/hoiquan/refs/heads/main/vip.m3u",
 ]
 
 EPG_URLS: Final[list[str]] = [
@@ -518,26 +518,6 @@ def fetch(url: str, timeout: int = GLOBAL_TIMEOUT) -> Optional[str]:
         return None
 
 
-def resolve_epg_url() -> str:
-    """
-    FIX #2: Thử từng EPG URL theo thứ tự ưu tiên, trả về URL đầu tiên hoạt động.
-    Phiên bản cũ luôn trả về EPG_URLS[0] mà không check — nếu server chết,
-    toàn bộ playlist sẽ gắn EPG link chết.
-    """
-    for epg_url in EPG_URLS:
-        try:
-            r = requests.head(
-                epg_url, timeout=10, headers=HTTP_HEADERS, allow_redirects=True
-            )
-            if r.status_code < 400:
-                print(f"  ✅ EPG hoạt động: {epg_url}")
-                return epg_url
-        except Exception as e:
-            print(f"  ⚠  EPG {epg_url}: {e}", file=sys.stderr)
-    print("  ⚠  Không có EPG URL nào hoạt động, bỏ qua EPG.", file=sys.stderr)
-    return ""
-
-
 def resolve_display_name(raw: str, tvg_id: str) -> str:
     """
     Ưu tiên tra cứu DISPLAY_NAME theo tvg-id.
@@ -803,8 +783,8 @@ def write_m3u(
 
 
 def main() -> None:
-    print("🔍  Kiểm tra EPG…")
-    epg_url = resolve_epg_url()  # FIX #2: giờ thực sự thử từng URL
+    epg_url = EPG_URLS[0]  # Dùng trực tiếp, không kiểm tra
+    print(f"📡  EPG: {epg_url}")
 
     processed: list[list[Channel]] = []
     for idx, src in enumerate(SOURCES, 1):
