@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: "0 18 * * *"   # 01:00 ICT hàng ngày
   workflow_dispatch:
+  push:
+    paths:
+      - "update_iptv.py"   # Tự chạy khi cập nhật code
 
 permissions:
   contents: write
