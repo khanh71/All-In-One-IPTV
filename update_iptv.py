@@ -22,7 +22,14 @@ import requests
 # ──────────────────────────────────────────────────────────────────────
 # CẤU HÌNH & HẰNG SỐ
 # ──────────────────────────────────────────────────────────────────────
-SOURCES: Final[list[str]] = ["https://1.org.vn/vmttv", "https://vmttv.duckdns.org/"]
+SOURCES: Final[list[str]] = [
+    "https://1.org.vn/vmttv",
+    "https://vmttv.duckdns.org/",
+    "https://raw.githubusercontent.com/vuminhthanh12/vuminhthanh12/refs/heads/main/vmttv",
+    "https://raw.githubusercontent.com/Bacbenny/Truyenhinhiptv/refs/heads/main/dekiki.m3u",
+    "https://raw.githubusercontent.com/Bacbenny/Verceliptv/refs/heads/main/VTV.m3u",
+    "https://raw.githubusercontent.com/hoiquanclick/hoiquan/refs/heads/main/vip.m3u",
+]
 
 EPG_URLS: Final[list[str]] = [
     "https://vnepg.site/epg.xml.gz",
@@ -310,37 +317,110 @@ TVGID_TO_PROVINCE: Final[dict[str, str]] = {
 }
 
 LOCAL_PROVINCE_ORDER: Final[list[str]] = [
-    "Hà Giang", "Tuyên Quang", "Cao Bằng", "Lạng Sơn", "Bắc Kạn",
-    "Thái Nguyên", "Quảng Ninh", "Bắc Giang", "Bắc Ninh", "Lào Cai",
-    "Yên Bái", "Phú Thọ", "Vĩnh Phúc", "Hà Nội", "Hòa Bình",
-    "Sơn La", "Điện Biên", "Lai Châu", "Hải Phòng", "Hải Dương",
-    "Hưng Yên", "Thái Bình", "Nam Định", "Hà Nam", "Ninh Bình",
-    "Thanh Hóa", "Nghệ An", "Hà Tĩnh", "Quảng Bình", "Quảng Trị",
-    "Thừa Thiên Huế", "Đà Nẵng", "Quảng Nam", "Quảng Ngãi",
-    "Bình Định", "Phú Yên", "Khánh Hòa", "Ninh Thuận", "Bình Thuận",
-    "Kon Tum", "Gia Lai", "Đắk Lắk", "Đắk Nông", "Lâm Đồng",
-    "Bình Phước", "Tây Ninh", "Bình Dương", "Đồng Nai",
-    "Bà Rịa - Vũng Tàu", "Long An", "Tiền Giang", "Bến Tre",
-    "Đồng Tháp", "Vĩnh Long", "Trà Vinh", "An Giang", "Kiên Giang",
-    "Cần Thơ", "Hậu Giang", "Sóc Trăng", "Bạc Liêu", "Cà Mau",
+    "Hà Giang",
+    "Tuyên Quang",
+    "Cao Bằng",
+    "Lạng Sơn",
+    "Bắc Kạn",
+    "Thái Nguyên",
+    "Quảng Ninh",
+    "Bắc Giang",
+    "Bắc Ninh",
+    "Lào Cai",
+    "Yên Bái",
+    "Phú Thọ",
+    "Vĩnh Phúc",
+    "Hà Nội",
+    "Hòa Bình",
+    "Sơn La",
+    "Điện Biên",
+    "Lai Châu",
+    "Hải Phòng",
+    "Hải Dương",
+    "Hưng Yên",
+    "Thái Bình",
+    "Nam Định",
+    "Hà Nam",
+    "Ninh Bình",
+    "Thanh Hóa",
+    "Nghệ An",
+    "Hà Tĩnh",
+    "Quảng Bình",
+    "Quảng Trị",
+    "Thừa Thiên Huế",
+    "Đà Nẵng",
+    "Quảng Nam",
+    "Quảng Ngãi",
+    "Bình Định",
+    "Phú Yên",
+    "Khánh Hòa",
+    "Ninh Thuận",
+    "Bình Thuận",
+    "Kon Tum",
+    "Gia Lai",
+    "Đắk Lắk",
+    "Đắk Nông",
+    "Lâm Đồng",
+    "Bình Phước",
+    "Tây Ninh",
+    "Bình Dương",
+    "Đồng Nai",
+    "Bà Rịa - Vũng Tàu",
+    "Long An",
+    "Tiền Giang",
+    "Bến Tre",
+    "Đồng Tháp",
+    "Vĩnh Long",
+    "Trà Vinh",
+    "An Giang",
+    "Kiên Giang",
+    "Cần Thơ",
+    "Hậu Giang",
+    "Sóc Trăng",
+    "Bạc Liêu",
+    "Cà Mau",
 ]
 
-_PROVINCE_IDX: Final[dict[str, int]] = {p: i for i, p in enumerate(LOCAL_PROVINCE_ORDER)}
+_PROVINCE_IDX: Final[dict[str, int]] = {
+    p: i for i, p in enumerate(LOCAL_PROVINCE_ORDER)
+}
 
 GROUP_LABEL_LOCAL: Final[str] = "Địa phương"
-GROUP_LABEL_QDVN: Final[str] = "Quốc Phòng"  # FIX #1: Hằng số rõ ràng cho group ANTV/QPVN
+GROUP_LABEL_QDVN: Final[str] = (
+    "Quốc Phòng"  # FIX #1: Hằng số rõ ràng cho group ANTV/QPVN
+)
 
 VTV_FIXED_ORDER: Final[list[str]] = [
-    "VTV1", "VTV2", "VTV3", "VTV4", "VTV5",
-    "VTV5 Tây Nam Bộ", "VTV5 Tây Nguyên",
-    "VTV6", "VTV7", "VTV8", "VTV9", "VTV10",
+    "VTV1",
+    "VTV2",
+    "VTV3",
+    "VTV4",
+    "VTV5",
+    "VTV5 Tây Nam Bộ",
+    "VTV5 Tây Nguyên",
+    "VTV6",
+    "VTV7",
+    "VTV8",
+    "VTV9",
+    "VTV10",
 ]
 
 HTV_FIXED_ORDER: Final[list[str]] = [
-    "HTV1", "HTV2", "HTV3", "HTV4", "HTV5", "HTV7", "HTV9",
-    "HTVC Thể Thao", "HTVC Ca Nhạc", "HTVC Du Lịch",
-    "HTVC Gia Đình", "HTVC Phim", "HTVC Phụ Nữ",
-    "HTVC Thuần Việt", "HTVC+",
+    "HTV1",
+    "HTV2",
+    "HTV3",
+    "HTV4",
+    "HTV5",
+    "HTV7",
+    "HTV9",
+    "HTVC Thể Thao",
+    "HTVC Ca Nhạc",
+    "HTVC Du Lịch",
+    "HTVC Gia Đình",
+    "HTVC Phim",
+    "HTVC Phụ Nữ",
+    "HTVC Thuần Việt",
+    "HTVC+",
 ]
 
 # ──────────────────────────────────────────────────────────────────────
@@ -350,7 +430,7 @@ HTV_FIXED_ORDER: Final[list[str]] = [
 # FIX #10: Pre-compile các regex trước đây nằm trong hàm resolve_display_name.
 # ──────────────────────────────────────────────────────────────────────
 _NORM_RE = re.compile(r"\s+")
-_DEDUP_RE = re.compile(r"[\s\-._]+")   # FIX #11: bỏ backslash thừa trước dấu chấm
+_DEDUP_RE = re.compile(r"[\s\-._]+")  # FIX #11: bỏ backslash thừa trước dấu chấm
 _BITRATE_RE = re.compile(r"(\d+(?:\.\d+)?)\s*mb(?:ps)?", re.I)
 
 # FIX #3: Thay \d+\s*kbps bằng pattern chính xác hơn, yêu cầu word boundary
@@ -395,7 +475,9 @@ class Channel:
     group_order: int
     province: str
     province_idx: int
-    quality: tuple[int, float]  # (tier, bitrate) — so sánh trực tiếp chất lượng kỹ thuật
+    quality: tuple[
+        int, float
+    ]  # (tier, bitrate) — so sánh trực tiếp chất lượng kỹ thuật
     tvg_id: str = ""
     tvg_logo: str = ""
 
@@ -403,6 +485,7 @@ class Channel:
 # ──────────────────────────────────────────────────────────────────────
 # HELPER FUNCTIONS
 # ──────────────────────────────────────────────────────────────────────
+
 
 def _dedup_key(name: str) -> str:
     """Tạo key định danh duy nhất: lowercase, loại bỏ khoảng trắng/dấu câu."""
@@ -439,7 +522,9 @@ def resolve_epg_url() -> str:
     """
     for epg_url in EPG_URLS:
         try:
-            r = requests.head(epg_url, timeout=10, headers=HTTP_HEADERS, allow_redirects=True)
+            r = requests.head(
+                epg_url, timeout=10, headers=HTTP_HEADERS, allow_redirects=True
+            )
             if r.status_code < 400:
                 print(f"  ✅ EPG hoạt động: {epg_url}")
                 return epg_url
@@ -495,7 +580,9 @@ def parse_m3u(text: str) -> list["Channel"]:
 
             m_grp = _GROUP_TITLE_RE.search(extinf_line)
             src_grp = m_grp.group(1).strip() if m_grp else ""
-            raw_name = extinf_line.split(",", 1)[-1].strip() if "," in extinf_line else ""
+            raw_name = (
+                extinf_line.split(",", 1)[-1].strip() if "," in extinf_line else ""
+            )
 
             if not raw_name:
                 continue
@@ -515,9 +602,17 @@ def parse_m3u(text: str) -> list["Channel"]:
                 mapped = "VTV"
             elif "htv" in src_grp_lower:
                 mapped = "HTV"
-            elif any(kw in src_grp_lower for kw in [
-                "địa phương", "dia phuong", "tỉnh", "tinh", "thiết yếu", "thiet yeu",
-            ]):
+            elif any(
+                kw in src_grp_lower
+                for kw in [
+                    "địa phương",
+                    "dia phuong",
+                    "tỉnh",
+                    "tinh",
+                    "thiết yếu",
+                    "thiet yeu",
+                ]
+            ):
                 mapped = "_LOCAL_"
             elif "quốc phòng" in src_grp_lower or "quoc phong" in src_grp_lower:
                 # FIX #1: Nhận diện group Quốc Phòng qua tên group
@@ -563,17 +658,19 @@ def parse_m3u(text: str) -> list["Channel"]:
             else:
                 continue
 
-            channels.append(Channel(
-                name=resolve_display_name(raw_name, tvg_id),
-                url=url,
-                group_label=g_label,
-                group_order=g_order,
-                province=province if g_order >= 2 else "",
-                province_idx=p_idx,
-                quality=quality_score(raw_name),
-                tvg_id=tvg_id,
-                tvg_logo=tvg_logo,
-            ))
+            channels.append(
+                Channel(
+                    name=resolve_display_name(raw_name, tvg_id),
+                    url=url,
+                    group_label=g_label,
+                    group_order=g_order,
+                    province=province if g_order >= 2 else "",
+                    province_idx=p_idx,
+                    quality=quality_score(raw_name),
+                    tvg_id=tvg_id,
+                    tvg_logo=tvg_logo,
+                )
+            )
 
     return channels
 
@@ -621,13 +718,13 @@ def _sort_key(ch: Channel) -> tuple:
     thay vì gọi lại nhiều lần trong tiến trình sort Timsort.
     """
     norm_name = _norm(ch.name)  # tính một lần duy nhất mỗi channel
-    if ch.group_order == 0:     # VTV
+    if ch.group_order == 0:  # VTV
         return (0, 0, _VTV_IDX.get(norm_name, 999), ch.name)
-    elif ch.group_order == 1:   # HTV
+    elif ch.group_order == 1:  # HTV
         return (1, 0, _HTV_IDX.get(norm_name, 999), ch.name)
-    elif ch.group_order == 2:   # Địa phương
+    elif ch.group_order == 2:  # Địa phương
         return (2, ch.province_idx, 0, ch.name)
-    else:                       # Quốc Phòng (order = 3) — cuối cùng
+    else:  # Quốc Phòng (order = 3) — cuối cùng
         return (3, 0, 0, ch.name)
 
 
