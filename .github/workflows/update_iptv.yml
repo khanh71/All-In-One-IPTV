@@ -27,8 +27,13 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Set Timezone to Vietnam (ICT)
+        run: sudo timedatectl set-timezone Asia/Ho_Chi_Minh
+
       - name: List files (debug)
-        run: ls -la
+        run: |
+          echo "Hiện tại là: $(date +'%Y-%m-%d %H:%M:%S %Z')"
+          ls -la
 
       - name: Run IPTV updater
         run: python update_iptv.py
@@ -38,5 +43,9 @@ jobs:
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add http-iptv.m3u
-          git diff --cached --quiet || git commit -m "🔄 Auto-update IPTV $(date +'%Y-%m-%d %H:%M ICT')"
+          
+          # Lấy thời gian hiện tại theo định dạng VN
+          VIETNAM_TIME=$(date +'%d/%m/%Y %H:%M')
+          
+          git diff --cached --quiet || git commit -m "🔄 Auto-update IPTV ($VIETNAM_TIME ICT)"
           git push
