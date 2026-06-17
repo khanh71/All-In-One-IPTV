@@ -79,11 +79,9 @@ Từ lúc này, cứ **1:00 AM hàng ngày** script sẽ tự chạy ngầm.
 #### Bước 1: Clone mã nguồn về máy
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/All-In-One-IPTV.git
+git clone https://github.com/khanh71/All-In-One-IPTV.git
 cd All-In-One-IPTV
 ```
-
-*(Thay `YOUR_USERNAME` bằng tên GitHub của bạn)*
 
 #### Bước 2: Cài đặt thư viện phụ thuộc
 
