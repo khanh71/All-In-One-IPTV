@@ -95,7 +95,6 @@ TVG_ID_MAP: Final[dict[str, str]] = {
     "cantho": "cantho1",
     "lamdong": "lamdong1",
     "ltv": "laichau",
-    "vovgthn": "hanoi1",
     # THVL → vinhlong
     "thvl1hd": "vinhlong1hd",
     "thvl1": "vinhlong1hd",
@@ -158,9 +157,6 @@ _CHANNEL_DATA: Final[dict[str, tuple[str, str]]] = {
     "htvcphunuhd": ("HTVC Phụ Nữ", "HTV"),
     "htvcthuanviethd": ("HTVC Thuần Việt", "HTV"),
     "htvcplushd": ("HTVC+", "HTV"),
-    # ── QUỐC PHÒNG ───────────────────────────────────────────────────
-    "antv": ("ANTV", "QDVN"),
-    "qpvn": ("QPVN", "QDVN"),
     # ── ĐỊA PHƯƠNG — Miền Bắc ────────────────────────────────────────
     "hagiang": ("Hà Giang", "Hà Giang"),
     "tuyenquang": ("Tuyên Quang", "Tuyên Quang"),
@@ -223,7 +219,6 @@ _CHANNEL_DATA: Final[dict[str, tuple[str, str]]] = {
     "binhduong": ("Bình Dương", "Bình Dương"),
     "dongnai1": ("Đồng Nai 1", "Đồng Nai"),
     "dongnai2": ("Đồng Nai 2", "Đồng Nai"),
-    "dongnai3": ("Đồng Nai 3", "Đồng Nai"),
     "baria": ("Bà Rịa - Vũng Tàu", "Bà Rịa - Vũng Tàu"),
     "longan": ("Long An", "Long An"),
     "tiengiang": ("Tiền Giang", "Tiền Giang"),
@@ -358,8 +353,7 @@ _PROVINCE_IDX: Final[dict[str, int]] = {p: i for i, p in enumerate(_PROVINCE_ORD
 _LABEL: Final[dict[str, str]] = {
     "VTV": "VTV",
     "HTV": "HTV",
-    "LOCAL": "Địa phương",
-    "QDVN": "Quốc Phòng",
+    "LOCAL": "Địa phương"
 }
 
 # Keywords nhận diện nhóm địa phương từ group-title
