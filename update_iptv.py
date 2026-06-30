@@ -21,7 +21,7 @@ import requests
 # CẤU HÌNH
 # ──────────────────────────────────────────────────────────────────────
 SOURCES: Final[list[str]] = [
-    "https://1.org.vn/vmttv",
+    # "https://1.org.vn/vmttv",
     "https://vmttv.duckdns.org/",
 ]
 
