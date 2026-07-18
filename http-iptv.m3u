@@ -21,7 +21,7 @@ https://live.fptplay53.net/live/media/v6abr/live247-hls-avc/index.m3u8
 #EXTINF:-1 tvg-id="vtv7hd" tvg-logo="https://i.imgur.com/bphN2eA.png" group-title="VTV",VTV7
 https://live.fptplay53.net/live/media/v7abr/live247-hls-avc/index.m3u8
 #EXTINF:-1 tvg-id="vtv8hd" tvg-logo="https://i.imgur.com/tjA1fU8.png" group-title="VTV",VTV8
-https://live.fptplay53.net/live/media/vtv8/live-hls-avc/index.m3u8
+https://live.fptplay53.net/fnxhd1/vtv8hd_vhls.smil/chunklist_b5000000.m3u8
 #EXTINF:-1 tvg-id="vtv9hd" tvg-logo="https://i.imgur.com/rUeimhI.png" group-title="VTV",VTV9
 https://live.fptplay53.net/live/media/v9abr/live247-hls-avc/index.m3u8
 #EXTINF:-1 tvg-id="vtv10hd" tvg-logo="https://i.imgur.com/n1VZWPh.png" group-title="VTV",VTV10
