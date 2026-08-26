@@ -21,12 +21,12 @@ import requests
 # CẤU HÌNH
 # ──────────────────────────────────────────────────────────────────────
 SOURCES: Final[list[str]] = [
-    //"https://1.org.vn/vmttv",
-    //"https://vmttv.duckdns.org/",
-https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/vn.m3u
+    # "https://1.org.vn/vmttv",
+    # "https://vmttv.duckdns.org/",
+    "https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/vn.m3u",
 ]
 
-EPG_URL: Final[str] = "https://vnepg.site/epg.xml.gz"
+EPG_URL: Final[str] = "https://epg.io.vn/epg.xml"
 OUTPUT_FILE: Final[str] = "http-iptv.m3u"
 GLOBAL_TIMEOUT: Final[int] = 20
 HTTP_HEADERS: Final[dict[str, str]] = {
