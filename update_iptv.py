@@ -21,8 +21,9 @@ import requests
 # CẤU HÌNH
 # ──────────────────────────────────────────────────────────────────────
 SOURCES: Final[list[str]] = [
-    "https://1.org.vn/vmttv",
-    "https://vmttv.duckdns.org/",
+    //"https://1.org.vn/vmttv",
+    //"https://vmttv.duckdns.org/",
+https://raw.githubusercontent.com/iptv-org/iptv/refs/heads/master/streams/vn.m3u
 ]
 
 EPG_URL: Final[str] = "https://vnepg.site/epg.xml.gz"
