@@ -26,33 +26,33 @@ https://vtvgolive-sctvdrm.vtvdigital.vn/manifest/vtv9/master.m3u8
 #EXTINF:-1 tvg-id="vtv10hd" tvg-logo="https://i.postimg.cc/tnH9zfxF/VTV10.png" group-title="VTV",VTV10
 https://vmttv.dpdns.org/tv360/?id=vtv10
 #EXTINF:-1 tvg-id="htv1hd" tvg-logo="https://i.imgur.com/KEMSBD3.png" group-title="HTV",HTV1
-https://freem3u.xyz/api/live/play.m3u8?vid=190
+https://1011154949.vnns.net/htvc/htv1.720p.nimble.adm.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="htv2hd" tvg-logo="https://i.imgur.com/2npoF3Q.png" group-title="HTV",HTV2
-https://freem3u.xyz/api/live/play.m3u8?vid=191
+https://1011154949.vnns.net/htvc/htv2.720p.nimble.adm.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="htv3hd" tvg-logo="https://i.imgur.com/TCoIsVF.png" group-title="HTV",HTV3
-https://freem3u.xyz/api/live/play.m3u8?vid=192
+https://1011154949.vnns.net/htvc/htv3.720p.nimble.adm.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="htv4hd" tvg-logo="https://i.imgur.com/BcCA0x2.png" group-title="HTV",HTV4
 https://1011154949.vnns.net/htvc/htv4.720p.nimble.adm.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="htv5" tvg-logo="https://i.imgur.com/EI0mJRf.png" group-title="HTV",HTV5
 https://freem3u.xyz/api/live/play.m3u8?vid=151
 #EXTINF:-1 tvg-id="htv7hd" tvg-logo="https://i.imgur.com/n2PEK28.png" group-title="HTV",HTV7
-https://freem3u.xyz/api/live/play.m3u8?vid=193
+https://live.tvon.vn/s2/abr_hls/htv7/720p.m3u8
 #EXTINF:-1 tvg-id="htv9hd" tvg-logo="https://i.imgur.com/6GSN524.png" group-title="HTV",HTV9
 https://vtvgoliveapp1-aws-plus-tn.vtvdigital.vn/aws-dp/hcmtv/playlist.m3u8
 #EXTINF:-1 tvg-id="htvthethaohd" tvg-logo="https://i.imgur.com/ikaiET3.png" group-title="HTV",HTVC Thể Thao
 https://vmttv.dpdns.org/tv360/?id=htv-the-thao
 #EXTINF:-1 tvg-id="htvcdulichhd" tvg-logo="https://i.imgur.com/mDemDFL.png" group-title="HTV",HTVC Du Lịch
-https://freem3u.xyz/api/live/play.m3u8?vid=133
+https://1011154949.vnns.net/htvc/htvcdulich.adm.720p.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="htvcgiadinhhd" tvg-logo="https://i.imgur.com/Al6xJme.png" group-title="HTV",HTVC Gia Đình
-https://freem3u.xyz/api/live/play.m3u8?vid=11
+https://1011154949.vnns.net/htvc/htvcgiadinh.adm.720p.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="htvcphimhd" tvg-logo="https://i.imgur.com/P0wqvmu.png" group-title="HTV",HTVC Phim
-https://freem3u.xyz/api/live/play.m3u8?vid=15
+https://1011154949.vnns.net/htvc/htvcphim.adm.720p.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="htvcphunuhd" tvg-logo="https://i.imgur.com/FxzpvHI.png" group-title="HTV",HTVC Phụ Nữ
-https://freem3u.xyz/api/live/play.m3u8?vid=12
+https://1011154949.vnns.net/htvc/htvcphunu.adm.720p.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="htvcthuanviethd" tvg-logo="https://i.imgur.com/KtMeo6q.png" group-title="HTV",HTVC Thuần Việt
 https://freem3u.xyz/api/live/play.m3u8?vid=13
 #EXTINF:-1 tvg-id="htvcplushd" tvg-logo="https://i.imgur.com/Tkjs3C5.png" group-title="HTV",HTVC+
-https://freem3u.xyz/api/live/play.m3u8?vid=132
+https://1011154949.vnns.net/htvc/htvcplus.adm.720p.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="tuyenquang" tvg-logo="https://i.imgur.com/Pfq3ix9.png" group-title="Địa phương",Tuyên Quang
 https://streaming.tuyenquangtv.vn/channel/tuyenquang/playlist.m3u8
 #EXTINF:-1 tvg-id="caobang" tvg-logo="https://i.imgur.com/RUJmK5D.png" group-title="Địa phương",Cao Bằng
@@ -130,15 +130,15 @@ https://618b88f69e53b.streamlock.net/THDT/thdttv/playlist.m3u8
 #EXTINF:-1 tvg-id="dongthap2" tvg-logo="https://i.imgur.com/PfETBEp.png" group-title="Địa phương",Đồng Tháp 2
 https://618b88f69e53b.streamlock.net/THDT2/thdttv2/chunklist.m3u8
 #EXTINF:-1 tvg-id="vinhlong1hd" tvg-logo="https://i.imgur.com/q3fjpYc.png" group-title="Địa phương",Vĩnh Long 1
-https://freem3u.xyz/api/live/play.m3u8?vid=25
+https://vtvgolive-sctvdrm.vtvdigital.vn/manifest/dp-vinhlong1tv/playlist_720p.m3u8
 #EXTINF:-1 tvg-id="vinhlong2hd" tvg-logo="https://i.imgur.com/zGv54Ed.png" group-title="Địa phương",Vĩnh Long 2
-https://freem3u.xyz/api/live/play.m3u8?vid=26
+https://1011154949.vnns.net/htvc/thvl2hd.720p.nimble.adm.tms/chunks.m3u8
 #EXTINF:-1 tvg-id="vinhlong3hd" tvg-logo="https://i.imgur.com/44c1Yoz.png" group-title="Địa phương",Vĩnh Long 3
 https://freem3u.xyz/api/live/play.m3u8?vid=219
 #EXTINF:-1 tvg-id="vinhlong4hd" tvg-logo="https://i.imgur.com/JWDsJxB.png" group-title="Địa phương",Vĩnh Long 4
 https://freem3u.xyz/api/live/play.m3u8?vid=220
 #EXTINF:-1 tvg-id="vinhlong5hd" tvg-logo="https://i.imgur.com/hSdSUqx.png" group-title="Địa phương",Vĩnh Long 5
-https://freem3u.xyz/api/live/play.m3u8?vid=91
+https://dethich.pw/thvl5/index.m3u8
 #EXTINF:-1 tvg-id="angiang1" tvg-logo="https://i.imgur.com/mgp6RAU.png" group-title="Địa phương",An Giang 1
 https://tv.angiangtv.vn/live/kgtv/kgtv.m3u8
 #EXTINF:-1 tvg-id="angiang2" tvg-logo="https://i.imgur.com/efrauLr.png" group-title="Địa phương",An Giang 2
