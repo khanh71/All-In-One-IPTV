@@ -56,7 +56,7 @@ https://1011154949.vnns.net/htvc/htvcplus.adm.720p.tms/playlist.m3u8
 #EXTINF:-1 tvg-id="tuyenquang" tvg-logo="https://i.imgur.com/Pfq3ix9.png" group-title="Địa phương",Tuyên Quang
 https://streaming.tuyenquangtv.vn/channel/tuyenquang/playlist.m3u8
 #EXTINF:-1 tvg-id="caobang" tvg-logo="https://i.imgur.com/RUJmK5D.png" group-title="Địa phương",Cao Bằng
-https://stream.thingnet.vn/live/smil:CRTV.smil/chunklist.m3u8
+http://luuchieu.truyenhinhso.vn/media/live/FEC4E26FBD78CE924E91BC03/index.m3u8
 #EXTINF:-1 tvg-id="langson" tvg-logo="https://i.imgur.com/yxz02UD.png" group-title="Địa phương",Lạng Sơn
 https://stream.langsontv.vn/live/285c78da0c246524c90917842f8de03bd21/playlist.m3u8
 #EXTINF:-1 tvg-id="thainguyen" tvg-logo="https://i.imgur.com/P3pbab8.png" group-title="Địa phương",Thái Nguyên
@@ -72,9 +72,9 @@ https://live.baolaocai.vn/channel2/stream.m3u8
 #EXTINF:-1 tvg-id="phutho" tvg-logo="https://i.imgur.com/LXuRwJY.png" group-title="Địa phương",Phú Thọ
 https://live.mediatech.vn/live/2856e81d201c99b4649b5c62f3cddad3881/chunklist.m3u8
 #EXTINF:-1 tvg-id="hanoi1" tvg-logo="https://i.postimg.cc/hvL15x02/Hanoi-TV1.png" group-title="Địa phương",Hà Nội 1
-https://liveh34.vtvprime.vn/hls/HANOI1TV/index.m3u8
+http://luuchieu.truyenhinhso.vn/media/live/D8F673B9DBBAECC4D440A0B4/index.m3u8
 #EXTINF:-1 tvg-id="hanoi2" tvg-logo="https://i.postimg.cc/Nft4rJgS/Hanoi-TV2.png" group-title="Địa phương",Hà Nội 2
-https://liveh34.vtvprime.vn/hls/HANOI2/index.m3u8
+http://luuchieu.truyenhinhso.vn/media/live/1FCC257A30175B8AC7BC4B3F/index.m3u8
 #EXTINF:-1 tvg-id="sonla" tvg-logo="https://i.postimg.cc/3JnLC20C/Snews.png" group-title="Địa phương",Sơn La
 https://live.mediatech.vn/live/28595222e707a364251b8724717894baa46/playlist.m3u8
 #EXTINF:-1 tvg-id="dienbien" tvg-logo="https://i.imgur.com/hMDRDxN.png" group-title="Địa phương",Điện Biên
@@ -102,7 +102,7 @@ https://live.huetv.com.vn/TRT-Online/playlist.m3u8
 #EXTINF:-1 tvg-id="danang1" tvg-logo="https://i.postimg.cc/8jwBQ42q/dnrt1.png" group-title="Địa phương",Đà Nẵng 1
 https://live.mediatech.vn/live/285b59a111d76974225a8e3004bfc31a509/chunklist.m3u8
 #EXTINF:-1 tvg-id="danang2" tvg-logo="https://i.postimg.cc/870Rs5Pm/dnrt2.png" group-title="Địa phương",Đà Nẵng 2
-https://liveh34.vtvprime.vn/hls/DANANG2/04.m3u8
+http://live-hq.evgcdn.net/live/2859145290d0d7947ef88b6240123b62474/playlist.m3u8
 #EXTINF:-1 tvg-id="quangngai" tvg-logo="https://i.postimg.cc/pdnCmw7y/QNg-TV1.png" group-title="Địa phương",Quảng Ngãi 1
 https://live.mediatech.vn/live/285aaa79b4b265a457d81bb72bc32e2c114/playlist.m3u8
 #EXTINF:-1 tvg-id="quangngai2" tvg-logo="https://i.postimg.cc/0j90HbNC/QNg-TV2.png" group-title="Địa phương",Quảng Ngãi 2
@@ -116,9 +116,9 @@ https://tv.gialaitv.vn/tv.m3u8
 #EXTINF:-1 tvg-id="daklak" tvg-logo="https://i.imgur.com/7CQqMeh.png" group-title="Địa phương",Đắk Lắk
 https://cdn.drt.vn/live/285a27750861b964c27af22091662a74f2f/playlist.m3u8
 #EXTINF:-1 tvg-id="lamdong1" tvg-logo="https://i.postimg.cc/f35Jkqv6/LD1.png" group-title="Địa phương",Lâm Đồng 1
-https://stream.thingnet.vn/live/smil:LTV.smil/chunklist.m3u8
+http://live-hq.evgcdn.net/live/285eb380a290dab40af8eafb1b05abce703/chunklist.m3u8
 #EXTINF:-1 tvg-id="lamdong2" tvg-logo="https://i.postimg.cc/n99zRFfP/LD2.png" group-title="Địa phương",Lâm Đồng 2
-https://liveh34.vtvprime.vn/hls/LAMDONG/01.m3u8
+http://luuchieu.truyenhinhso.vn/media/live/5609ACBAE41E5281B3F67282/index.m3u8
 #EXTINF:-1 tvg-id="tayninh1" tvg-logo="https://i.imgur.com/HFm3hbC.png" group-title="Địa phương",Tây Ninh
 https://live.mediatech.vn/live/2851dc2c9af68834814a89e61db0faee561/playlist.m3u8
 #EXTINF:-1 tvg-id="dongnai1" tvg-logo="https://i.postimg.cc/HJN6GzyV/DN1.png" group-title="Địa phương",Đồng Nai 1
